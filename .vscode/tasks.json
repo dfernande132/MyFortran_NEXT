@@ -1,0 +1,209 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "PC: smoke (compilar)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build.ps1",
+        "-Objetivo",
+        "smoke-pc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "PC: tests (compilar y ejecutar)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build.ps1",
+        "-Objetivo",
+        "test"
+      ],
+      "group": "test",
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "PC: smoke (ejecutar)",
+      "type": "process",
+      "command": "${workspaceFolder}/build/pc/smoke.exe",
+      "dependsOn": "PC: smoke (compilar)",
+      "problemMatcher": []
+    },
+    {
+      "label": "Next: smoke (compilar con z88dk)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build.ps1",
+        "-Objetivo",
+        "smoke-next"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "PC: TAC del fichero abierto (compilar, listar y ejecutar)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build.ps1",
+        "-Objetivo",
+        "tac-pc",
+        "-Programa",
+        "${file}"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "PC: Z80 del fichero abierto (generar .asm y ejecutar en emulador)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build.ps1",
+        "-Objetivo",
+        "z80-pc",
+        "-Programa",
+        "${file}"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Next: MyFortran.nex (compilar editor + compilador)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build.ps1",
+        "-Objetivo",
+        "next"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Next: spike (compilar y ver tamano)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build.ps1",
+        "-Objetivo",
+        "spike-next",
+        "-Spike",
+        "${input:spike}"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Editor PC: tests (compilar y ejecutar)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build_editor.ps1",
+        "-Objetivo",
+        "test"
+      ],
+      "group": "test",
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "Editor Next: compilar (.nex) y ver tamano",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build_editor.ps1",
+        "-Objetivo",
+        "next"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Editor Next: compilar SIN leer fichero (demo)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build_editor.ps1",
+        "-Objetivo",
+        "next",
+        "-SinFichero"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Editor Next: spike tilemap 80x32 (color por caracter)",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/build_editor.ps1",
+        "-Objetivo",
+        "tilemap"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "spike",
+      "type": "pickString",
+      "description": "Spike de tools/spike/ (sin .c)",
+      "options": [
+        "e1_integrar"
+      ],
+      "default": "e1_integrar"
+    }
+  ]
+}

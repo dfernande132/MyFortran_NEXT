@@ -1,0 +1,30 @@
+/* g1_programas.h - GENERADO a partir de los ficheros de examples/ (no editar): fuentes que compila el spike g1. */
+static const char P_FIBONACCI[] =
+    "C     FIBONACCI CON ENTEROS DE 16 BITS (EL MAYOR QUE CABE ES F(23)=28657)\n"
+    "      PROGRAM FIBO\n"
+    "      INTEGER F(23), I\n"
+    "      F(1) = 1\n"
+    "      F(2) = 1\n"
+    "      DO 10 I = 3, 23\n"
+    "         F(I) = F(I - 1) + F(I - 2)\n"
+    "   10 CONTINUE\n"
+    "      PRINT *, 'FIBONACCI'\n"
+    "      DO 20 I = 1, 23\n"
+    "         PRINT *, I, F(I)\n"
+    "   20 CONTINUE\n"
+    "      END\n";
+static const char P_CADENAS[] =
+    "C     CADENAS: CHARACTER, concatenacion, subcadenas y comparacion\n"
+    "      PROGRAM CADENA\n"
+    "      CHARACTER*12 SAL\n"
+    "      CHARACTER*5 NOM(3)\n"
+    "      INTEGER I\n"
+    "      NOM(1) = 'ANA'\n"
+    "      NOM(2) = 'LUIS'\n"
+    "      NOM(3) = 'MARIA'\n"
+    "      DO 10 I = 1, 3\n"
+    "         SAL = 'HOLA ' // NOM(I)\n"
+    "         PRINT *, SAL\n"
+    "         IF (NOM(I) .GT. 'B') PRINT *, 'DESPUES DE B', NOM(I)(1:2)\n"
+    "   10 CONTINUE\n"
+    "      END\n";

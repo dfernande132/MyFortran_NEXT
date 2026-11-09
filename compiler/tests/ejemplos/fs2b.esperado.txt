@@ -1,0 +1,11 @@
+ UNO 
+ DOS 
+ MUCH
+ UNO +DOS    
+ IGUAL
+ MAYOR
+ MUCH|
+ 4
+ #..... ###... #####.
+ ### #..
+ PQ    |

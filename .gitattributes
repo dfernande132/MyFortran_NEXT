@@ -1,0 +1,4 @@
+# Lo que NO se publica (git archive / tools/exportar_publico.bat)
+docs/referencia export-ignore
+docs/COORDINACION.md export-ignore
+tools/spike/obsoleto export-ignore
