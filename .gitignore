@@ -1,0 +1,7 @@
+build/
+*.o
+*.map
+*.lis
+*.nex
+*.bin
+_to_delete/

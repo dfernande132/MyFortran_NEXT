@@ -1,0 +1,7 @@
+ Entero, real, logico, texto:
+3 4.5 T 'Hola mundo'
+ 3 4.50000000 T Hola mundo  
+ Dos enteros (uno por linea):
+20
+-5
+ 15 -100

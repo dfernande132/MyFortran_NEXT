@@ -1,0 +1,32 @@
+{
+  "version": 4,
+  "configurations": [
+    {
+      "name": "PC (gcc)",
+      "compilerPath": "gcc",
+      "cStandard": "c99",
+      "intelliSenseMode": "windows-gcc-x64",
+      "includePath": [
+        "${workspaceFolder}/compiler/include",
+        "${workspaceFolder}/compiler/src",
+        "${workspaceFolder}/editor/src",
+        "${workspaceFolder}/platform/pc"
+      ],
+      "defines": ["MF_TARGET_PC"]
+    },
+    {
+      "name": "Next (z88dk)",
+      "compilerPath": "",
+      "cStandard": "c99",
+      "intelliSenseMode": "gcc-x86",
+      "includePath": [
+        "C:/z88dk/include/**",
+        "${workspaceFolder}/compiler/include",
+        "${workspaceFolder}/compiler/src",
+        "${workspaceFolder}/editor/src",
+        "${workspaceFolder}/platform/next"
+      ],
+      "defines": ["MF_TARGET_NEXT", "__z88dk_fastcall=", "__z88dk_callee="]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Pila por debajo de $C000: ahi se mapean los bancos de codigo.
+-pragma-define:REGISTER_SP=0xBFF0
+# el backend no lleva el texto del listado .asm (ahorra ~3 KB de banco)
+-DMF_SIN_LISTADO
+# el editor llama a mf_compilar/mf_mensaje (compiler/include) y encuentra ed_plat.h para ed_next.c
+-DED_CON_COMPILADOR
+-Ieditor/src
+# MF_SIN_TEXTO solo quita el texto en memoria de pruebas (texto.c) de los trampolines; los mensajes de error siguen
+-DMF_SIN_TEXTO
+# el backend se parte en dos bancos (43 y 48): back.c y z80.c se compilan con BACK_DIVIDIDO (ver compiler/src/back_c.c)
+-DBACK_DIVIDIDO
