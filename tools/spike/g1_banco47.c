@@ -14,6 +14,7 @@ void t_sim_escribir(uint16_t id, const Simbolo *s);    /* la capacidad de un CHA
 #undef sim_leer
 #undef sim_dim_leer
 #undef sim_escribir
+#ifndef MF_SIN_G1_CARGAR          /* e1 (el .nex integrado) no carga programas de prueba: ahorra ~700 B del banco 47 */
 #include <string.h>
 #include "../../editor/src/edbuf.h"
 #include "g1_programas.h"
@@ -25,3 +26,4 @@ void g1_cargar(uint8_t n)
     eb_iniciar();
     eb_agregar((const uint8_t *)t, (uint16_t)strlen(t));
 }
+#endif

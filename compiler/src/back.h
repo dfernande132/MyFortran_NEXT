@@ -29,6 +29,7 @@
 #define BACK_NO_CABE       (-2)   /* la imagen no cabe en el buffer                  */
 #define BACK_INTERNO       (-3)   /* salto relativo fuera de rango, rutina ausente...*/
 #define BACK_ETIQUETAS     (-4)   /* tabla de direcciones de etiquetas insuficiente  */
+#define BACK_TEMPORALES    (-5)   /* mas de NTMP (128) temporales en todo el programa (se numeran seguidos entre unidades) */
 
 typedef struct {
     int16_t  err;

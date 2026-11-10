@@ -9,3 +9,5 @@
 -DMF_SIN_TEXTO
 # el backend se parte en dos bancos (43 y 48): back.c y z80.c se compilan con BACK_DIVIDIDO (ver compiler/src/back_c.c)
 -DBACK_DIVIDIDO
+# el .nex integrado no usa g1_cargar (programas de prueba del driver g1): fuera, y con el eb_* del editor ya en el banco 41 no se podria llamar desde el 47
+-DMF_SIN_G1_CARGAR

@@ -1,0 +1,8 @@
+C     ESTRES DE PILA: SUMA DE 20 OPERANDOS (ARBOL PROFUNDO HACIA LA IZQUIERDA)
+      PROGRAM S20
+      INTEGER I, N, R
+      I = 1
+      N = 2
+      R = I+N+I+N+I+N+I+N+I+N+I+N+I+N+I+N+I+N+I+N
+      PRINT *, R
+      END

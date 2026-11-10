@@ -44,7 +44,7 @@
 #define MF_COD_STMT     70      /* + ErrorStmt (1..17)                       */
 #define MF_COD_EXPR     90      /* + ErrorExpr (1..10)                       */
 #define MF_COD_LEX      110      /* + ErrorLex (0..6)                         */
-#define MF_COD_GEN      120     /* generacion del .nex (1..7), solo con mf.gen == MF_GEN_ERR */
+#define MF_COD_GEN      120     /* generacion del .nex (1..8), solo con mf.gen == MF_GEN_ERR */
 #define MF_COD_UNI      130     /* + ErrorUni (1..20): unidades de programa y llamadas (unid.h)  */
 
 #define MF_GEN_NO       0       /* no se genero (comprobar, o la compilacion tuvo errores)   */

@@ -4,7 +4,7 @@ A **Fortran 77** compiler for the **ZX Spectrum Next**, with its own editor (Tur
 Next: you type the program, compile it, and get a stand-alone `.nex` file. This is a **didactic** project: the code is
 written to be understood, every decision has its own document, and nothing is considered proven unless it has been measured.
 
-Version **0.1** (first public release). MIT license (see `LICENSE`).
+Version **0.11** (0.1 was the first public release). MIT license (see `LICENSE`).
 
 > The documentation under `docs/` (chapters, design decisions, TAC specification) is written in Spanish.
 
@@ -12,7 +12,7 @@ Version **0.1** (first public release). MIT license (see `LICENSE`).
 |---|---|
 | ![MyFortran editor: start screen with the key help](screenshots/Inicio.png) | ![MyFortran editor with primos.f loaded, with syntax highlighting](screenshots/primos.png) |
 
-## What is in 0.1
+## What is in 0.11 (same language as 0.1)
 
 A single `MyFortran.nex` (editor + compiler, split across eight 16 KB banks) that generates Z80 `.nex` programs.
 
@@ -28,7 +28,7 @@ with adjustable dimensions.
 **Intrinsic functions:** `ABS`, `MOD`, `SIGN`, `DIM`, `MAX`, `MIN` (and their variants `IABS`, `ISIGN`, `IDIM`, `MAX0`, `AMAX1`...),
 `AINT`, `ANINT`, `NINT`, `SQRT`, `LEN`, `INT`, `REAL`, `FLOAT`, `IFIX`.
 
-### Known limitations of 0.1
+### Known limitations
 
 The compiler rejects the following with a clear message (usually `not supported yet`); they are planned for 0.2 and 0.3:
 
@@ -92,12 +92,14 @@ TAC interpreter and a Z80 emulator for testing) and on the Next.
 On the Next, memory is the problem: 48 KB visible. The code lives in 16 KB banks with resident **trampolines**, and the tables
 live in 8 KB data pages (`banco.h`).
 
-### Memory (0.1 measurements, Next)
+### Memory (0.11 measurements, Next)
 
-Free bytes at the end of each bank, after building `MyFortran.nex`: 41 (editor) 4,584 B, 42 2,451 B, 43 2,215 B, 44 2,133 B,
-45 1,906 B, 46 748 B, 47 959 B, 48 3,087 B. The end of the resident `bss` is at `$BCE8` and the stack reaches `$BFAD`. The stack
-used while compiling and building the worst-case program (`examples/` and `tools/medir/pila/maximo.f`) is **583 of 645 bytes**
-(measured with `Esc` `M`, a hidden development command).
+0.11 does not add language features: it frees resident memory for the stack. The bank trampolines are now one generic assembler
+routine (`tools/spike/e1_tramp.asm`) plus 7-byte stubs, and the editor's buffer code lives in bank 41. The end of the resident `bss`
+moved from `$BCE8` (0.1) to `$A9FA`, so there are **5,622 bytes** between it and the initial `SP` (`$BFF0`), against 776 in 0.1.
+Free bytes at the end of the banks: 41 (editor) 2,673 B, 47 1,708 B (the others as in 0.1). Stack used while compiling and building
+(`Esc` `M`, a hidden development command): 555-911 B on the stress programs in `tools/medir/pila/`; the ones that hung in 0.1 now compile.
+The generator's "too many temporaries in the program (limit 128)" error replaces the misleading "construct not supported".
 
 ## Tests
 
@@ -123,7 +125,8 @@ Design decisions are numbered in `docs/decisiones/` (0001 stages ... 0015 data a
 
 ## Roadmap
 
-- **0.1** (this one): everything above.
+- **0.1**: everything above.
+- **0.11** (this one): same language, 4.8 KB more stack, clearer error for too many temporaries.
 - **0.2**: `COMMON`, `SAVE`, procedures and intrinsics as arguments.
 - **0.3**: alternate `RETURN`, `ENTRY`, `EQUIVALENCE`, `BLOCK DATA`.
 

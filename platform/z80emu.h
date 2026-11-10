@@ -21,6 +21,7 @@ typedef struct {
     uint8_t  op;
     uint32_t pasos;
     uint32_t ciclos_aprox;      /* numero de instrucciones ejecutadas x 1 (solo referencia) */
+    uint16_t pila_usada;        /* maximo de bytes de pila usados (SP inicial - SP minimo; incluye la direccion de retorno) */
 } Z80EmuRes;
 
 /* mem: 65536 bytes con el programa ya cargado. Se llama a `pc` como subrutina. */

@@ -421,7 +421,7 @@ static uint16_t dir_mem(uint16_t op)
     switch (TAC_CLASE(op)) {
     case TAC_TEMP:
         if (v >= NTMP) {
-            fallo(BACK_NO_SOPORTADO);
+            fallo(BACK_TEMPORALES);
             v = 0;
         }
         if (v + 1 > bk_tmax) bk_tmax = (uint16_t)(v + 1);
@@ -623,7 +623,7 @@ static void cadena_info(uint16_t op, char *nom, uint16_t *dir, int *len)
         break;
     case TAC_TEMP:
         if (v >= NTMP) {
-            fallo(BACK_NO_SOPORTADO);
+            fallo(BACK_TEMPORALES);
             return;
         }
         if (v + 1 > bk_tmax) bk_tmax = (uint16_t)(v + 1);
@@ -713,7 +713,7 @@ static void traducir_c(const TacInst *t)
     case TOP_TMP:
         v = TAC_VALOR(t->a);
         if (v >= NTMP) {
-            fallo(BACK_NO_SOPORTADO);
+            fallo(BACK_TEMPORALES);
             break;
         }
         if (v + 1 > bk_tmax) bk_tmax = (uint16_t)(v + 1);

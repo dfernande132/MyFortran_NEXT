@@ -96,11 +96,14 @@ void z80emu_ejecutar(uint8_t *mem, uint16_t pc, uint32_t max_pasos,
 {
     Cpu c;
     size_t u = 0;
+    uint16_t sp_ini, sp_min;
 
     memset(&c, 0, sizeof(c));
     memset(res, 0, sizeof(*res));
     c.m = mem;
     c.sp = 0xFFF0;
+    sp_ini = c.sp;
+    sp_min = c.sp;
     c.pc = pc;
     wr16(&c, (uint16_t)(c.sp - 2), 0x0000);       /* RET final -> direccion 0 */
     c.sp = (uint16_t)(c.sp - 2);
@@ -112,6 +115,9 @@ void z80emu_ejecutar(uint8_t *mem, uint16_t pc, uint32_t max_pasos,
         uint16_t nn;
         int r, s, cc;
 
+        if (c.sp < sp_min) {
+            sp_min = c.sp;
+        }
         if (res->pasos++ >= max_pasos) {
             res->estado = Z80EMU_LIMITE;
             break;
@@ -334,5 +340,9 @@ void z80emu_ejecutar(uint8_t *mem, uint16_t pc, uint32_t max_pasos,
         }
     }
 fin:
+    if (c.sp < sp_min) {
+        sp_min = c.sp;
+    }
+    res->pila_usada = (uint16_t)(sp_ini - sp_min);
     res->ciclos_aprox = res->pasos;
 }

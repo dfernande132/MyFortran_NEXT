@@ -62,6 +62,11 @@ static void ok(int cond, const char *nombre, const char *que)
     }
 }
 
+/* Pila del programa generado en el Next: SP inicial $BFFE, arranque en $BE00..$BE1F (nex.c): quedan 478 B. */
+#define PILA_PRESUPUESTO 478u
+static uint16_t pila_max;
+static char pila_max_prog[96];
+
 static void probar(const char *nombre)
 {
     static char prog[65536], esp[16384], ent[4096], o1[16384], o2[16384];
@@ -105,6 +110,11 @@ static void probar(const char *nombre)
         return;
     }
     z80emu_ejecutar(mem, br.entry, 200000000u, o2, sizeof(o2), &er);
+    if (er.pila_usada > pila_max) {
+        pila_max = er.pila_usada;
+        strncpy(pila_max_prog, nombre, sizeof(pila_max_prog) - 1);
+    }
+    ok(er.pila_usada <= PILA_PRESUPUESTO, nombre, "la pila del programa Z80 supera el presupuesto del Next");
     ok(strcmp(o1, o2) == 0, nombre, "las salidas del TAC y del Z80 difieren");
     if (!tiene_esp) {
         return;
@@ -123,6 +133,7 @@ int main(void)
     for (i = 0; i < sizeof(programas) / sizeof(programas[0]); i++) {
         probar(programas[i]);
     }
+    printf("pila Z80 maxima de los programas generados: %u B (%s); presupuesto %u B\n", (unsigned)pila_max, pila_max_prog, PILA_PRESUPUESTO);
     printf("%d pruebas, %d fallos\n", pruebas, fallos);
     return fallos != 0;
 }

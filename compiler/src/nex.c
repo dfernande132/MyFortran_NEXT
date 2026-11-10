@@ -96,7 +96,7 @@ int16_t nex_escribir(NexSalida sal, const BackRes *r)
 /* Genera el Z80 del TAC actual (salida propia a pantalla, sin ROM) y lo escribe como .nex por la salida del editor.
  * Devuelve 0 si todo fue bien o un codigo MF_COD_GEN + k (mf_mensaje): 1 construccion no soportada,
  * 2 no cabe la imagen, 3 error interno, 4 demasiadas etiquetas, 5 no cabe en el .nex, 6 no se pudo abrir
- * el fichero, 7 fallo al escribir o cerrar. */
+ * el fichero, 7 fallo al escribir o cerrar, 8 mas de 128 temporales en el programa. */
 uint8_t nex_generar(const MfSalida *s)
 {
     BackRes r;
@@ -107,6 +107,9 @@ uint8_t nex_generar(const MfSalida *s)
     back_generar(NULL, 16384, 0x8000, NULL, &r);
     back_salida_pantalla(0);                         /* el defecto: no deja la salida a pantalla puesta */
     if (r.err != BACK_OK) {
+        if (r.err == BACK_TEMPORALES) {
+            return MF_COD_GEN + 8;                   /* demasiados temporales en todo el programa */
+        }
         return (uint8_t)(MF_COD_GEN - r.err);        /* err -1..-4 -> 1..4 */
     }
     if (nex_comprobar(&r) != NEX_OK) {

@@ -6,9 +6,3 @@
 
 uint8_t ed_ejecutar(void);
 
-uint8_t t_ed_ejecutar(void)
-{
-    uint8_t ant = banco_actual, r;
-    mapear(BANCO_ED); r = ed_ejecutar(); mapear(ant);
-    return r;
-}

@@ -113,6 +113,8 @@ switch ($Objetivo) {
         # Un spike puede tener varios ficheros: <prefijo>_*.c (p. ej. s2_codigo.c y s2_banco47.c)
         $prefijo = ($Spike -split '_')[0]
         $fuentesSpike = @(Get-ChildItem "tools/spike/${prefijo}_*.c" | ForEach-Object { $_.FullName })
+        # ensamblador del spike (p. ej. e1_tramp.asm: trampolines de banco genericos)
+        $fuentesSpike += @(Get-ChildItem "tools/spike/${prefijo}_*.asm" -ErrorAction SilentlyContinue | ForEach-Object { $_.FullName })
         # Flags extra opcionales: tools/spike/<Spike>.flags (una por linea, # = comentario)
         $extra = @()
         $ficheroFlags = "tools/spike/$Spike.flags"

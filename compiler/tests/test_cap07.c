@@ -672,7 +672,7 @@ static void test_nex(void)
     COMPROBAR(nex_comprobar(&br) == NEX_OK);
 
     /* todos los mensajes de generacion existen y caben */
-    for (i = 1; i <= 7; i++) {
+    for (i = 1; i <= 8; i++) {
         mf_mensaje((uint8_t)(MF_COD_GEN + i), m);
 #ifndef MF_SIN_TEXTO
         COMPROBAR(m[0] != '\0');

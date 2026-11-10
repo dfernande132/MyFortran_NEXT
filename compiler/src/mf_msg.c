@@ -52,13 +52,13 @@ void msg_sem(uint8_t e, char *dst)             /* sem_msg.c tambien (el banco 45
 /* Errores de la generacion del .nex (nex.c, codigo MF_COD_GEN + e); antes en nex.c (banco 43, que se quedo corto) */
 void msg_gen(uint8_t e, char *dst)
 {
-    static const char *const t[8] = {
+    static const char *const t[9] = {
         "unknown error", "construct not supported by the Z80 backend yet", "program image too large",
         "internal error in the Z80 backend", "too many labels for the Z80 backend",
         "program does not fit below $BE00", "cannot create the output file",
-        "error writing the output file"
+        "error writing the output file", "too many temporaries in the program (limit 128)"
     };
 
-    copiar_msg(dst, t[e < 8 ? e : 0]);
+    copiar_msg(dst, t[e < 9 ? e : 0]);
 }
 #endif
